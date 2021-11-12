@@ -1,6 +1,8 @@
 package it.plansoft.hello.controller;
 
 import it.plansoft.hello.dto.RubricaDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,7 @@ public interface IRubricaController {
 
     /**
      * recupero gli oggetti tramite la ricerca per nome, cognome, indirizzo
+     *
      * @param name
      * @param surname
      * @param address
@@ -25,12 +28,15 @@ public interface IRubricaController {
 
     /**
      * ricerca tramite chiave.
+     *
      * @param id
      * @return
      */
     RubricaDto findById(Long id);
 
     RubricaDto save(RubricaDto dto);
+
+    Page<RubricaDto> paged(Pageable pageable);
 
     RubricaDto update(Long id, RubricaDto dto);
 

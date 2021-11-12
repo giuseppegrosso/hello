@@ -4,8 +4,12 @@ import it.plansoft.hello.dto.RubricaDto;
 import it.plansoft.hello.mapper.IRubricaMapper;
 import it.plansoft.hello.model.Rubrica;
 import it.plansoft.hello.repository.IRubricaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,5 +81,20 @@ public class RubricaService implements IRubricaService {
             return mapper.toDto(byId.get());
 
         return null;
+    }
+    @Override
+    public Page<RubricaDto> findAll(Pageable pageable) {
+        Page<Rubrica> all = this.repository.findAll(pageable);
+
+        return convertPagetoDtos(all);
+    }
+
+    // convert pageable model to pageable dto.
+    private Page<RubricaDto> convertPagetoDtos(Page<Rubrica> models) {
+
+        List<Page<RubricaDto>> dtoToBeReturned = new ArrayList<>();
+        Page<RubricaDto> p = new PageImpl(models.getContent(), models.getPageable(), models.getTotalPages());
+
+        return p;
     }
 }

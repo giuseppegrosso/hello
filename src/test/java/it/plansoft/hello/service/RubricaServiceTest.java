@@ -49,9 +49,9 @@ class RubricaServiceTest {
 
 
     @Test
-    public void testFindBySurnameShouldOk()
+    public void itShouldFindBySearchOk()
     {
-
+        // give --> mock
         List<Rubrica> list = new ArrayList<>();
         Rubrica empOne = new Rubrica(1L, "Grosso", "Giuseppe", "via xx");
         Rubrica empTwo = new Rubrica(2L, "Grosso", "Lorenzo", "via xx");
@@ -61,10 +61,12 @@ class RubricaServiceTest {
         list.add(empTwo);
         list.add(empThree);
 
+        // when
         when(repo.findBySurname("Grosso")).thenReturn(list);
-        //test
+        // test
         List<RubricaDto> empList = this.service.findBySearch(null, "Grosso", null);
 
+        // Then
         assertEquals(3, empList.size());
 
 
@@ -73,13 +75,16 @@ class RubricaServiceTest {
     @Test
     public void getRubricaByIdTest()
     {
+        // give mock
         Rubrica r = new Rubrica(1L,"Grosso","Giuseppe","user@email.com");
         Optional<Rubrica> o = Optional.of(r);
 
+        // when
         when(repo.findById(1L)).thenReturn(o);
 
         RubricaDto rubricaDto = this.service.findById(1L);
 
+        // then
         assertEquals("Giuseppe", rubricaDto.getName());
         assertEquals("Grosso", rubricaDto.getSurname());
         assertEquals("user@email.com", rubricaDto.getAddress());

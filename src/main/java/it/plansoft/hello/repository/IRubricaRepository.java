@@ -21,4 +21,7 @@ public interface IRubricaRepository extends JpaRepository<Rubrica, Long> {
     @Query("SELECT CASE WHEN COUNT(r) > 0 then TRUE ELSE FALSE END " +
             "FROM Rubrica r WHERE r.surname = ?1")
     Boolean selectExistsSurname(String surname);
+
+    // ricerca della rubrica dato il cognome
+    List<Rubrica> findByName(String name);
 }

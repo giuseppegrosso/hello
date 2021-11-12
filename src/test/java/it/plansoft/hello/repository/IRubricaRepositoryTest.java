@@ -6,16 +6,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Giuseppe Grosso
@@ -39,6 +34,7 @@ class IRubricaRepositoryTest {
     @AfterEach
     public void shutdown() {
         log.info("shutdown");
+        this.repo.deleteAll();
     }
 
 
@@ -49,17 +45,17 @@ class IRubricaRepositoryTest {
 
         assertTrue(rubricaList.size() > 0);
 
+        Rubrica rubrica = rubricaList.get(0);
+
+        assertTrue(rubrica.getSurname().equals("Grosso"));
+
     }
 
     @Test
     void itShouldSelectIfExistsSurname()
     {
         String surname = "Grosso";
-        // fornire dato
-        Rubrica rubrica = new Rubrica("Grosso", "Giuseppe",
-                "via delle fonti 11");
-        // quando
-        this.repo.save(rubrica);
+        // cerac del dato
         boolean exists = this.repo.selectExistsSurname(surname);
 
         // dopo

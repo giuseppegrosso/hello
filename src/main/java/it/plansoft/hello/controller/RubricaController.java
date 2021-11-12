@@ -3,6 +3,8 @@ package it.plansoft.hello.controller;
 import it.plansoft.hello.dto.RubricaDto;
 import it.plansoft.hello.service.RubricaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +46,12 @@ public class RubricaController implements IRubricaController {
     @PostMapping("/save")
     public RubricaDto save(@RequestBody RubricaDto dto) {
         return rubricaService.save(dto);
+    }
+
+    @Override
+    @GetMapping("/searchPaged")
+    public Page<RubricaDto> paged(Pageable pageable) {
+        return rubricaService.findAll(pageable);
     }
 
     @Override

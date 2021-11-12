@@ -1,5 +1,8 @@
 package it.plansoft.hello.mapper;
 
+import it.plansoft.hello.model.Rubrica;
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 import java.util.Set;
 
@@ -16,5 +19,7 @@ public interface IMapper<DTO, MODEL> {
     List<MODEL> toModels(List<DTO> dtos);
     // set
     Set<DTO> toSetDtos(Set<MODEL> model);
+
+    //Page<DTO> toPagebleDtos(Page<MODEL> models);
     // ... aggiungere eventuali altre collection
 }
