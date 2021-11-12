@@ -1,4 +1,4 @@
-# publication
+# hello
 
 Hello is a spring boot project for studyng Spring boot feature, in particular
 
