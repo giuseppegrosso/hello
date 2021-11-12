@@ -85,6 +85,4 @@ class RubricaServiceTest {
         assertEquals("user@email.com", rubricaDto.getAddress());
     }
 
-
-
 }

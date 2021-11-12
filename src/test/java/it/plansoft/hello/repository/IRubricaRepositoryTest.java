@@ -43,7 +43,7 @@ class IRubricaRepositoryTest {
 
 
     @Test
-    public void testFindBySurnameShouldOk()
+    public void itShouldFindBySurnameShouldOk()
     {
         List<Rubrica> rubricaList = this.repo.findBySurname("Grosso");
 
